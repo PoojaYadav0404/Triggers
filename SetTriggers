@@ -1,0 +1,15 @@
+function SetTriggers() {
+  var ssId = SpreadsheetApp.getActiveSpreadsheet().getId();
+  var UserId = Session.getActiveUser().getEmail();
+  if (UserId === "dme@bajatoparts.com") {
+    var Triggers = ScriptApp.getProjectTriggers();
+    if (Triggers.length > 0) {
+      Triggers.forEach(trig => {
+        ScriptApp.deleteTrigger(trig);
+      })
+    }
+    
+    //ScriptApp.newTrigger("genNewPartCode").forSpreadsheet(ssId).onEdit().create();
+  }
+  else {SpreadsheetApp.getActiveSpreadsheet().toast("User access denied.","Error",6)}
+}
